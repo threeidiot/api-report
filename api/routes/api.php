@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+# 项目列表,编辑,添加
+Route::get('/project/rows', 'ProjectController@rows');
+Route::get('/project/edit', 'ProjectController@edit');
