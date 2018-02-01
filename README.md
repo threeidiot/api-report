@@ -43,3 +43,19 @@ php artisan migrate --seed
 # 启动 api 服务，访问 http://127.0.0.1:7500 展示 api 列表
 php artisan serve --host=0.0.0.0 --port=7500
 ```
+
+### web 本地部署
+
+web 基于 react + mobx + antd-design 开发，开发工具 yarn + webpack + babel
+
+```
+git clone git@github.com:threeidiot/api-report.git
+cd api-report/web
+
+# 下载项目依赖
+yarn install
+
+# 启动 web 服务，访问 http://127.0.0.1:7600 展示 web 界面
+yarn start
+
+```
