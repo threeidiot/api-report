@@ -10,7 +10,11 @@ const { Sider } = Layout
 export default class LeftSider extends React.Component {
   constructor (props) {
     super(props)
-    this.routeStore = this.props.stores.routeStore
+    this.projectsStore = this.props.stores.projectsStore
+  }
+
+  componentDidMount () {
+    this.projectsStore.fetchRows()
   }
 
   render () {
@@ -18,12 +22,15 @@ export default class LeftSider extends React.Component {
       <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
         <div className='logo'>API Report</div>
         <Menu theme='dark' mode='inline'>
-          <Menu.Item key={1}>
-            <Link to='/project/detail' className='link'>测试项目-1</Link>
-          </Menu.Item>
-          <Menu.Item key={2}>
-            <Link to='/doc/edit' className='link'>测试项目-2</Link>
-          </Menu.Item>
+          {
+            this.projectsStore.rows.map((p, i) => {
+              return (
+                <Menu.Item key={p.id}>
+                  <Link to={`/project/${i}`} className='link'>{p.title}</Link>
+                </Menu.Item>
+              )
+            })
+          }
         </Menu>
       </Sider>
     )

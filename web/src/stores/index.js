@@ -1,7 +1,7 @@
 import RouteStore from './RouteStore'
-import ProjectStore from './ProjectStore'
+import ProjectsStore from './ProjectsStore'
 
 export default {
   routeStore: new RouteStore(),
-  projectStore: new ProjectStore()
+  projectsStore: new ProjectsStore()
 }

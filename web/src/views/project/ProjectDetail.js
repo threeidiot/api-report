@@ -6,12 +6,22 @@ import { inject, observer } from 'mobx-react'
 export default class ProjectDetail extends Component {
   constructor (props) {
     super(props)
-    this.projectStore = this.props.stores.projectStore
+    this.projectsStore = props.stores.projectsStore
+    this.projectsStore.setIndex(this.props.match.params.index)
+  }
+
+  componentDidUpdate () {
+    this.projectsStore.setIndex(this.props.match.params.index)
+  }
+
+  componentDidMount () {
   }
 
   render () {
+    const row = this.projectsStore.row
+
     return (
-      <p>project detail { this.projectStore.row.name }</p>
+      <p>project title: {row.title}</p>
     )
   }
 }
