@@ -7,11 +7,10 @@ export default class ProjectDetail extends Component {
   constructor (props) {
     super(props)
     this.projectsStore = props.stores.projectsStore
-    this.projectsStore.setIndex(this.props.match.params.index)
   }
 
-  componentDidUpdate () {
-    this.projectsStore.setIndex(this.props.match.params.index)
+  componentWillReceiveProps (props) {
+    this.projectsStore.setIndex(props.match.params.index)
   }
 
   componentDidMount () {
