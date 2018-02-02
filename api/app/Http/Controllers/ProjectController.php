@@ -16,7 +16,7 @@ class ProjectController extends Controller
 
     public function rows(Request $req) {
 
-        $rows = Project::get()->toArray();
+        $rows = Project::orderBy('id', 'desc')->get()->toArray();
 
         return $this->_ajaxSuccess([
             'rows' => $rows,
