@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+$router->get('/', 'DocController@rows');
+$router->get('/doc/{category}/{action}', 'DocController@page');

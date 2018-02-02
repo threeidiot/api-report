@@ -42,7 +42,7 @@ class ProjectEditController extends Controller
         $row->title = $req->get('title');
         $row->host = $req->get('host');
         $row->schemes = $req->get('schemes');
-        $row->basePath = $req->get('base_path', '');
+        $row->base_path = $req->get('base_path', '');
         $row->save();
 
 
