@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 # 项目列表,编辑,添加
-Route::get('/project/rows', 'ProjectController@rows');
-Route::get('/project/edit', 'ProjectController@edit');
+Route::get('/project/rows', 'ProjectRowsController@run');
+Route::get('/project/edit', 'ProjectEditController@run');
