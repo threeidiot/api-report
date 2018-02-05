@@ -31,13 +31,13 @@ class ProjectEditController extends Controller
         $id = $req->get('id', 0);
         if ($id) {
             $row = Project::whereId($id)->first();
+            if (empty($row)) {
+                return $this->_ajaxError('没有找到项目数据');
+            }
         } else {
             $row = new Project();
         }
 
-        if (empty($row)) {
-            return $this->_ajaxError('没有找到项目数据');
-        }
 
         $row->title = $req->get('title');
         $row->host = $req->get('host');

@@ -28,24 +28,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Project withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Project withoutTrashed()
  * @mixin \Eloquent
- * @property string $title 名称
- * @property string $host 域名
- * @property string $schemes 协议类型
- * @property string $base_path 请求前缀路径
- * @property string $produces 返回数据格式
+ * @property int $project_id 项目 ID
+ * @property string $path 路径
+ * @property string $method 请求方法
+ * @property int $deprecated 不推荐使用
+ * @property string $tags 标签
+ * @property string $summary 摘要
  * @property string|null $description 描述
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Project whereBasePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Project whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Project whereHost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Project whereProduces($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Project whereSchemes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Project whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api whereDeprecated($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api whereMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api whereSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Api whereTags($value)
  */
-class Project extends Model
+class Api extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'project';
+    protected $table = 'api';
 
 
 }
