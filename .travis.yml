@@ -17,11 +17,3 @@ script:
   # Unit test
   - ./api/vendor/bin/phpunit -c api/phpunit.xml
 
-matrix:
-  fast_finish: true
-
-# Cache package sources
-cache:
-  directories:
-    - $HOME/.composer/cache
-
