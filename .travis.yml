@@ -21,4 +21,4 @@ script:
   - ./api/vendor/bin/phpunit -c api/phpunit.xml
 
 after_success:
-- travis_retry php vendor/bin/coveralls
+- travis_retry php api/vendor/bin/coveralls
