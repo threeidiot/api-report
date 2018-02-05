@@ -6,19 +6,17 @@ php:
   - 7.1
   - 7.2
 
-before_install:
-  - composer self-update
-
 install:
-  - composer require satooshi/php-coveralls -d api
-  - composer install -d api
+  - travis_retry composer self-update -d api
+  - travis_retry composer require --no-update satooshi/php-coveralls -d api
+  - travis_retry composer install --no-interaction --prefer-dist -d api
 
 script:
   # config laravel env
   - cp api/.env.example api/.env
   - php api/artisan key:generate
   # Unit test
-  - ./api/vendor/bin/phpunit -c api/phpunit.xml
+  - travis_wait ./api/vendor/bin/phpunit --verbose --coverage-clover api/build/logs/clover.xml -c api/phpunit.xml
 
 after_success:
 - travis_retry php api/vendor/bin/coveralls
