@@ -12,8 +12,8 @@ install:
 
 script:
   # config laravel env
-    - cp api/.env.example cp api/.env
-    - php api/artisan key:generate
+  - cp api/.env.example cp api/.env
+  - php api/artisan key:generate
   # Unit test
   - ./api/vendor/bin/phpunit -c api/phpunit.xml
 
