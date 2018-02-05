@@ -8,12 +8,12 @@ php:
   - 7.2
 
 install:
-  - composer validate
-  - composer install
+  - composer validate -d api
+  - composer install -d api
 
 script:
   # Unit test
-  - ./vendor/bin/phpunit
+  - ./api/vendor/bin/phpunit -c api/phpunit.xml
 
 matrix:
   fast_finish: true
