@@ -1,0 +1,25 @@
+sudo: false
+
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+
+install:
+  - composer validate
+  - composer install
+
+script:
+  # Unit test
+  - ./vendor/bin/phpunit
+
+matrix:
+  fast_finish: true
+
+# Cache package sources
+cache:
+  directories:
+    - $HOME/.composer/cache
+
