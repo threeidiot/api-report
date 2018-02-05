@@ -44,10 +44,6 @@ class ApiEditController extends Controller
             $row = new Api();
         }
 
-//        var_dump($req->get('description', ''));
-//        dd($req->all());
-//        exit;
-
 
         $row->project_id = $req->get('project_id');
         $row->path = $req->get('path');
