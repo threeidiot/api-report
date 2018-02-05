@@ -11,6 +11,9 @@ install:
   - composer install -d api
 
 script:
+  # config laravel env
+    - cp api/.env.example cp api/.env
+    - php api/artisan key:generate
   # Unit test
   - ./api/vendor/bin/phpunit -c api/phpunit.xml
 
