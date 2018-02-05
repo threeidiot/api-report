@@ -2,7 +2,13 @@
 
 零学习成本，简单好用的 API 管理系统
 
+[![Source Code][badge-source]][source]
+[![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
+[![Build Status][badge-build]][build]
+[![Coverage Status][badge-coverage]][coverage]
+[![Total Downloads][badge-downloads]][downloads]
+
 [![Build Status](https://travis-ci.org/threeidiot/api-report.svg?branch=master)](https://travis-ci.org/threeidiot/api-report)
 
 ## TODO
