@@ -6,17 +6,23 @@ php:
   - 7.1
   - 7.2
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 install:
-  - travis_retry composer self-update -d api
-  - travis_retry composer require --no-update satooshi/php-coveralls -d api
-  - travis_retry composer install --no-interaction --prefer-dist -d api
+    - mkdir -p api/build/logs
+    - mv ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ${HOME}/xdebug.ini || return 0
+    - 'if [ "$MIN_STABILITY" != "" ]; then composer config minimum-stability $MIN_STABILITY; fi'
+    - 'if [ "$SYMFONY_VERSION" != "" ]; then sed -i "s/\"symfony\/\([^\"]*\)\": \"^2[^\"]*\"/\"symfony\/\1\": \"$SYMFONY_VERSION\"/g" composer.json; fi'
+    - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction -d api
+    - if [ "$CHECKS" = "yes" ]; then travis_retry composer install-dev-tools -d api; fi;
 
 script:
-  # config laravel env
-  - cp api/.env.example api/.env
-  - php api/artisan key:generate
-  # Unit test
-  - travis_wait ./api/vendor/bin/phpunit --verbose --coverage-clover api/build/logs/clover.xml -c api/phpunit.xml
+    - cp ${HOME}/xdebug.ini ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini || return 0
+    - vendor/bin/phpunit -c api/phpunit.xml -v
+    - rm ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini || return 0
+    - if [ "$CHECKS" = "yes" ]; then composer sca -d api; fi;
 
 after_success:
-- travis_retry php api/vendor/bin/coveralls
+- bin/php-coveralls -v --exclude-no-stmt
