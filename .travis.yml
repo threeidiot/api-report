@@ -6,7 +6,11 @@ php:
   - 7.1
   - 7.2
 
+before_install:
+  - composer self-update
+
 install:
+  - composer require satooshi/php-coveralls -d api
   - composer install -d api
 
 script:
@@ -16,3 +20,5 @@ script:
   # Unit test
   - ./api/vendor/bin/phpunit -c api/phpunit.xml
 
+after_success:
+- travis_retry php vendor/bin/coveralls
