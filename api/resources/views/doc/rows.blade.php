@@ -29,6 +29,11 @@
   <li><a href="/doc/api/edit">接口编辑和添加</a></li>
 </ul>
 
+<h4>参数</h4>
+<ul>
+  <li><a href="/doc/param/rows">参数列表</a></li>
+  <li><a href="/doc/param/edit">参数编辑和添加</a></li>
+
 <p>建议在游览器中使用 json 解析插件: JsonView (格式化并高亮 json)</p>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.slim.min.js"></script>

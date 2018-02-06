@@ -20,3 +20,7 @@ Route::get('/project/edit', 'ProjectEditController@run');
 # API列表,编辑,添加
 Route::get('/api/rows', 'ApiRowsController@run');
 Route::get('/api/edit', 'ApiEditController@run');
+
+# 参数列表,编辑,添加
+Route::get('/param/rows', 'ParamRowsController@run');
+Route::get('/param/edit', 'ParamEditController@run');
