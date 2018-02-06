@@ -16,10 +16,10 @@ module.exports = {
   },
 
   // 外部库
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  },
+  // externals: {
+  //   'react': 'React',
+  //   'react-dom': 'ReactDOM'
+  // },
 
   module: {
     rules: [

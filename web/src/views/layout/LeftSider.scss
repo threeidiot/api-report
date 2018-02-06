@@ -1,0 +1,48 @@
+.left-sider {
+  overflow: 'auto'; 
+  height: '100vh'; 
+  position: 'fixed'; 
+  left: 0;
+
+  .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, .2);
+    border-radius: 6px;
+    margin: 16px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 32px;
+    color: white;
+  }
+
+  .add-project-btn {
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-bottom: 10px;
+    button {
+      border-color: #aaa;
+      color: #aaa;
+      display: block;
+      width: 100%;
+      font-size: 13px;
+      &:hover {
+        border-color: white;
+        color: white;
+      }
+    }
+  }
+
+  .ant-menu-horizontal {
+    float: right;
+    border-bottom: 0;
+    .ant-menu-item-selected a {
+      color: #108ee9 !important;
+    }
+
+    .ant-menu-submenu-title {
+      font-size: 13px;
+      height: 44px;
+      line-height: 44px;
+    }
+  }
+}

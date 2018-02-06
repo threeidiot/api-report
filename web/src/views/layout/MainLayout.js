@@ -17,12 +17,12 @@ export default class MainLayout extends Component {
     this.routeStore = this.props.stores.routeStore
   }
 
-  getRouteListHtml (routes, key = 0) {
+  getRouteListHtml (routes) {
     let routeListHtml = []
     routes.map((r, i) => {
-      const uniqueKey = key.toString() + i.toString()
+      const uniqueKey = i.toString()
       if (r.component) {
-        routeListHtml.push(<Route key={uniqueKey} path={r.path} component={r.component} exact />)
+        routeListHtml.push(<Route key={uniqueKey} path={r.path} component={r.component} exact history />)
       }
     })
     return routeListHtml
@@ -35,7 +35,7 @@ export default class MainLayout extends Component {
           <Layout>
             <LeftSider />
 
-            <Layout style={{ marginLeft: 200 }}>
+            <Layout>
               <TopHeader />
 
               <Content className='content'>
