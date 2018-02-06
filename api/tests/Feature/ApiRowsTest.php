@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class ApiRowsTest extends TestCase
 {
-
     public function testBasicTest()
     {
         $uri = '/api/rows?project_id=1';
