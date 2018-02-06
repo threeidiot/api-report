@@ -23,6 +23,11 @@ export default class LeftSider extends React.Component {
     })
   }
 
+  onLinkClick (index) {
+    this.projectsStore.setIndex(index)
+    this.apisStore.fetchRows(this.projectsStore.row.id)
+  }
+
   render () {
     return (
       <Sider className='left-sider'>
@@ -38,7 +43,7 @@ export default class LeftSider extends React.Component {
             this.projectsStore.rows.map((p, i) => {
               return (
                 <Menu.Item key={i} >
-                  <Link to={`/project/${i}`} className='link'>{p.title}</Link>
+                  <Link to={`/project/${i}`} onClick={_ => this.onLinkClick(i)} className='link'>{p.title}</Link>
                 </Menu.Item>
               )
             })

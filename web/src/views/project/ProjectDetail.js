@@ -10,23 +10,13 @@ export default class ProjectDetail extends Component {
     this.projectsStore = props.stores.projectsStore
     this.apisStore = props.stores.apisStore
 
-    this.updateRenderData(props)
+    // 获取参数的方式
+    // props.match.params.index
   }
 
-  componentWillReceiveProps (props) {
-    this.updateRenderData(props)
-  }
+  componentWillReceiveProps (props) { }
 
-  componentDidMount () {
-  }
-
-  updateRenderData (props) {
-    // 首页时，没有 url 参数, 不用执行 LeftSider.js 已经获取
-    if (props.match.params.index) {
-      this.projectsStore.setIndex(props.match.params.index)
-      this.apisStore.fetchRows(this.projectsStore.row.id)
-    }
-  }
+  componentDidMount () { }
 
   render () {
     const columns = [{
@@ -49,10 +39,11 @@ export default class ProjectDetail extends Component {
     return (
       <div className='project-detail'>
         <Table
+          bordered
+          size='small'
           columns={columns}
           dataSource={this.apisStore.rows.slice()}
           rowKey='id'
-          bordered
         />
       </div>
     )
