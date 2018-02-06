@@ -22,7 +22,7 @@ script:
     - cp ${HOME}/xdebug.ini ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini || return 0
     - cp api/.env.example api/.env
     - php api/artisan key:generate
-    - api/vendor/bin/phpunit -c api/phpunit.xml -v
+    - api/vendor/bin/phpunit -c api/phpunit.xml --coverage-clover api/build/logs/clover.xml -v
     - rm ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini || return 0
     - if [ "$CHECKS" = "yes" ]; then composer sca -d api; fi;
 
