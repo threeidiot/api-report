@@ -64,6 +64,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='项目名称' >
             {
               getFieldDecorator('title', {
+                initialValue: this.projectsStore.row.title || '',
                 rules: [{ required: true, message: '请输入项目名称' }]
               })(<Input />)
             }
@@ -71,6 +72,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='主机' help='域名、IP，可带端口' >
             {
               getFieldDecorator('host', {
+                initialValue: this.projectsStore.row.host || '',
                 rules: [{ required: true, message: '请输入主机' }]
               })(<Input />)
             }
@@ -86,7 +88,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='请求前缀'>
             {
               getFieldDecorator('base_path', {
-                rules: [{ required: true, message: '请输入请求前缀' }]
+                initialValue: this.projectsStore.row.base_path || ''
               })(<Input />)
             }
           </FormItem>

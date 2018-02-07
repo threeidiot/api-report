@@ -17,7 +17,7 @@ export default class ProjectsStore {
 
   @computed get row () {
     if (this.rows.has(this.currId)) {
-      this.rows.get(this.currId)
+      return this.rows.get(this.currId)
     }
     return {}
   }

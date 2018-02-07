@@ -2,8 +2,8 @@ import React from 'react'
 import { Menu, Layout, Button } from 'antd'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
-import './LeftSider.scss'
 import ProjectEditModal from 'views/project/ProjectEditModal'
+import './LeftSider.scss'
 
 const { Sider } = Layout
 
