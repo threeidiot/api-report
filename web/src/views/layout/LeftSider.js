@@ -3,6 +3,7 @@ import { Menu, Layout, Button } from 'antd'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import './LeftSider.scss'
+import ProjectEditModal from 'views/project/ProjectEditModal'
 
 const { Sider } = Layout
 
@@ -28,6 +29,10 @@ export default class LeftSider extends React.Component {
     this.apisStore.fetchRows(this.projectsStore.row.id)
   }
 
+  openProjectEditModal () {
+    this.projectEditModal.show()
+  }
+
   render () {
     return (
       <Sider className='left-sider'>
@@ -35,7 +40,12 @@ export default class LeftSider extends React.Component {
         <div className='logo'>API Report</div>
 
         <div className='add-project-btn'>
-          <Button type='dashed' ghost icon='plus'>添加项目</Button>
+          <Button type='dashed' ghost icon='plus' onClick={_ => this.openProjectEditModal()}>添加项目</Button>
+          <ProjectEditModal
+            wrappedComponentRef={m => (this.projectEditModal = m)}
+            index={-1}
+            {...this.props}
+          />
         </div>
 
         <Menu theme='dark' mode='inline' selectedKeys={[this.projectsStore.index + '']}>

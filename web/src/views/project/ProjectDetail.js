@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Table, Tag, Button, Divider, Icon } from 'antd'
+import { Table, Tag, Button, Divider } from 'antd'
 import './ProjectDetail.scss'
 
 @inject('stores')
@@ -38,6 +38,7 @@ export default class ProjectDetail extends Component {
       dataIndex: 'summary'
     }, {
       title: '操作',
+      width: 200,
       render: _ => {
         return (
           <span>

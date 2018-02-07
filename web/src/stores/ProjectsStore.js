@@ -28,4 +28,16 @@ export default class ProjectsStore {
 
     return this.index
   }
+
+  @action async saveRow (index, params) {
+    const result = await api.get('/project/edit', params)
+    if (result) {
+      if (index === -1) {
+        this.rows.splice(0, 0, result.row)
+      } else {
+        this.rows.splice(index, 1, result.row)
+      }
+    }
+    return result
+  }
 }
