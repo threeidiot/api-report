@@ -14,10 +14,6 @@ class ProjectEditModal extends Component {
     }
   }
 
-  componentWillReceiveProps (props) { }
-
-  componentDidMount () { }
-
   show () {
     this.setState({ visible: true })
   }
@@ -29,7 +25,7 @@ class ProjectEditModal extends Component {
   save () {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.projectsStore.saveRow(this.props.index, values).then(result => {
+        this.projectsStore.saveRow(values).then(result => {
           this.setState({ visible: false })
         })
       }
@@ -52,7 +48,7 @@ class ProjectEditModal extends Component {
         okText='确定'
         maskClosable={false}
         destroyOnClose
-        title={this.props.index === -1 ? '添加项目' : this.projectsStore.rows[this.props.index].title}
+        title={this.props.id === 0 ? '添加项目' : this.projectsStore.rows.get(this.props.id).title}
         onOk={_ => this.save()}
         onCancel={_ => this.hide()}
       >
@@ -60,7 +56,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='' >
             {
               getFieldDecorator('id', {
-                initialValue: this.props.index === -1 ? 0 : this.projectsStore.rows[this.props.index].id,
+                initialValue: this.props.id,
                 rules: [{ required: true }]
               })(<Input hidden />)
             }

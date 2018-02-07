@@ -17,16 +17,16 @@ export default class LeftSider extends React.Component {
   }
 
   componentDidMount () {
-    this.projectsStore.fetchRows().then(index => {
-      if (index > -1) {
-        this.apisStore.fetchRows(this.projectsStore.row.id)
+    this.projectsStore.fetchRows().then(result => {
+      if (this.projectsStore.currId > 0) {
+        this.apisStore.fetchRows(this.projectsStore.currId)
       }
     })
   }
 
-  onLinkClick (index) {
-    this.projectsStore.setIndex(index)
-    this.apisStore.fetchRows(this.projectsStore.row.id)
+  switchProject (id) {
+    this.projectsStore.setCurrId(id)
+    this.apisStore.fetchRows(id)
   }
 
   openProjectEditModal () {
@@ -41,19 +41,16 @@ export default class LeftSider extends React.Component {
 
         <div className='add-project-btn'>
           <Button type='dashed' ghost icon='plus' onClick={_ => this.openProjectEditModal()}>添加项目</Button>
-          <ProjectEditModal
-            wrappedComponentRef={m => (this.projectEditModal = m)}
-            index={-1}
-            {...this.props}
-          />
+          <ProjectEditModal wrappedComponentRef={m => (this.projectEditModal = m)} id={0} {...this.props} />
         </div>
 
-        <Menu theme='dark' mode='inline' selectedKeys={[this.projectsStore.index + '']}>
+        <Menu theme='dark' mode='inline' selectedKeys={[this.projectsStore.currId + '']}>
           {
-            this.projectsStore.rows.map((p, i) => {
+            this.projectsStore.sortedKeys.map(id => {
+              const p = this.projectsStore.rows.get(id)
               return (
-                <Menu.Item key={i} >
-                  <Link to={`/project/${i}`} onClick={_ => this.onLinkClick(i)} className='link'>{p.title}</Link>
+                <Menu.Item key={id} >
+                  <Link to={`/project/${id}`} onClick={_ => this.switchProject(id)}>{p.title}</Link>
                 </Menu.Item>
               )
             })

@@ -3,40 +3,44 @@ import * as api from '../helpers/api'
 
 export default class ProjectsStore {
   @observable rows
-  @observable index
+  @observable currId
 
   constructor () {
-    this.rows = []
-    this.index = -1
+    this.rows = new Map()
+    this.currId = 0
+  }
+
+  @computed get sortedKeys () {
+    const sortedKeys = [...this.rows.keys()].sort((a, b) => b - a)
+    return sortedKeys
   }
 
   @computed get row () {
-    if (this.rows.length > 0 && this.rows.length > this.index) {
-      return this.rows[this.index]
+    if (this.rows.has(this.currId)) {
+      this.rows.get(this.currId)
     }
     return {}
   }
 
-  @action setIndex (i) {
-    this.index = i
+  @action setCurrId (id) {
+    this.currId = id
   }
 
   @action async fetchRows () {
     const result = await api.get('/project/rows')
-    this.rows = result.rows
-    this.index = this.rows.length > 0 ? 0 : -1
-
-    return this.index
+    if (result) {
+      for (let row of result.rows) {
+        this.rows.set(row.id, row)
+      }
+    }
+    this.currId = result.rows.length > 0 ? result.rows[0].id : 0
+    return result
   }
 
-  @action async saveRow (index, params) {
+  @action async saveRow (params) {
     const result = await api.get('/project/edit', params)
     if (result) {
-      if (index === -1) {
-        this.rows.splice(0, 0, result.row)
-      } else {
-        this.rows.splice(index, 1, result.row)
-      }
+      this.rows.set(result.row.id, result.row)
     }
     return result
   }
