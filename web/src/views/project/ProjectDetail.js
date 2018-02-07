@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Table, Tag, Button, Divider } from 'antd'
+import { Table, Tag, Button, Divider, Row, Col } from 'antd'
 import './ProjectDetail.scss'
 
 @inject('stores')
@@ -12,7 +12,7 @@ export default class ProjectDetail extends Component {
     this.apisStore = props.stores.apisStore
 
     // 获取参数的方式
-    // props.match.params.index
+    this.projectsStore.setCurrId(props.match.params.id)
   }
 
   componentWillReceiveProps (props) { }
@@ -50,10 +50,24 @@ export default class ProjectDetail extends Component {
       }
     }]
 
+    const project = this.projectsStore.row
+
     return (
       <div className='project-detail'>
-        <div className='name'>
+
+        <div className='project'>
+          <Row>
+            <Col span={12}>
+              <h3>{project.title}</h3>
+              <Tag color='blue'>{project.schemes}://{project.host}{project.base_path}</Tag>
+            </Col>
+            <Col span={12} className='btns'>
+              <Button type='primary' icon='plus' size='small'>添加接口</Button>
+            </Col>
+          </Row>
+          <Divider />
         </div>
+
         <Table
           pagination={false}
           bordered
