@@ -1,12 +1,11 @@
 import { observable } from 'mobx'
 
-import DocEdit from 'views/doc/DocEdit'
+import HomeIndex from 'views/home/HomeIndex'
 import ProjectDetail from 'views/project/ProjectDetail'
 
 export default class RouteStore {
   @observable routes = [
-    { name: '项目详情', path: '/', component: ProjectDetail },
-    { name: '项目详情', path: '/project/:id', component: ProjectDetail },
-    { name: '文档编辑', path: '/doc/edit', component: DocEdit }
+    { name: '首页', path: '/', component: HomeIndex },
+    { name: '项目详情', path: '/project/:id', component: ProjectDetail }
   ]
 }

@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 
 @inject('stores')
 @observer
-export default class DocEdit extends Component {
+export default class HomeIndex extends Component {
   constructor (props) {
     super(props)
     this.projectsStore = this.props.stores.projectsStore
@@ -11,7 +11,7 @@ export default class DocEdit extends Component {
 
   render () {
     return (
-      <p>doc edit</p>
+      <p>首页 占位页面</p>
     )
   }
 }

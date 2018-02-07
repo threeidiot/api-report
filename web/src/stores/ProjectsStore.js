@@ -33,7 +33,6 @@ export default class ProjectsStore {
         this.rows.set(row.id, row)
       }
     }
-    this.currId = result.rows.length > 0 ? result.rows[0].id : 0
     return result
   }
 
