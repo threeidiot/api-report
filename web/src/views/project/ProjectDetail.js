@@ -52,6 +52,8 @@ export default class ProjectDetail extends Component {
 
     return (
       <div className='project-detail'>
+        <div className='name'>
+        </div>
         <Table
           pagination={false}
           bordered
