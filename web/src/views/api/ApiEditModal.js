@@ -48,19 +48,19 @@ class ApiEditModal extends Component {
         okText='确定'
         maskClosable={false}
         destroyOnClose
-        title={row.id === 0 ? '添加接口' : row.summary}
+        title={this.apisStore.currId === 0 ? '添加接口' : row.summary}
         onOk={_ => this.save()}
         onCancel={_ => this.hide()}
       >
         <Form>
-          <FormItem {...formItemLayout} label='' >
+          <FormItem {...formItemLayout} label='' style={{ margin: 0 }}>
             {
               getFieldDecorator('id', {
                 initialValue: row.id
               })(<Input hidden />)
             }
           </FormItem>
-          <FormItem {...formItemLayout} label='' >
+          <FormItem {...formItemLayout} label='' style={{ margin: 0 }}>
             {
               getFieldDecorator('project_id', {
                 initialValue: this.projectsStore.currId,

@@ -53,7 +53,7 @@ class ProjectEditModal extends Component {
         onCancel={_ => this.hide()}
       >
         <Form>
-          <FormItem {...formItemLayout} label='' >
+          <FormItem {...formItemLayout} label='' style={{ margin: 0 }}>
             {
               getFieldDecorator('id', {
                 initialValue: this.props.id,
