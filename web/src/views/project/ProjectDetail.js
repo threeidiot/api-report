@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Table, Tag, Button, Divider, Row, Col } from 'antd'
+import ApiEditModal from 'views/api/ApiEditModal'
 import './ProjectDetail.scss'
 
 @inject('stores')
@@ -18,6 +19,10 @@ export default class ProjectDetail extends Component {
   componentWillReceiveProps (props) { }
 
   componentDidMount () { }
+
+  openApiEditModal (id) {
+    this.apiEditModal.show(id)
+  }
 
   render () {
     const columns = [{
@@ -39,12 +44,13 @@ export default class ProjectDetail extends Component {
     }, {
       title: '操作',
       width: 200,
-      render: _ => {
+      render: (_, row) => {
         return (
           <span>
-            <Button className='edit-btn' type='primary' size='small' icon='edit'>编辑</Button>
+            <Button type='primary' ghost size='small' icon='edit'
+              onClick={_ => this.openApiEditModal(row.id)}>编辑</Button>
             <Divider type='vertical' />
-            <Button className='debug-btn' type='primary' size='small' icon='play-circle-o'>调试</Button>
+            <Button type='primary' ghost size='small' icon='play-circle-o'>调试</Button>
           </span>
         )
       }
@@ -62,7 +68,7 @@ export default class ProjectDetail extends Component {
               <Tag color='blue'>{project.schemes}://{project.host}{project.base_path}</Tag>
             </Col>
             <Col span={12} className='btns'>
-              <Button type='primary' icon='plus' size='small'>添加接口</Button>
+              <Button type='primary' icon='plus' size='small' onClick={_ => this.openApiEditModal(0)}>添加接口</Button>
             </Col>
           </Row>
           <Divider />
@@ -72,9 +78,11 @@ export default class ProjectDetail extends Component {
           pagination={false}
           bordered
           columns={columns}
-          dataSource={this.apisStore.rows.slice()}
+          dataSource={this.apisStore.sortedArrRows}
           rowKey='id'
         />
+
+        <ApiEditModal wrappedComponentRef={m => (this.apiEditModal = m)} {...this.props} />
       </div>
     )
   }
