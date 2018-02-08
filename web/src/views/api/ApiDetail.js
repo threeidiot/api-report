@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Tag, Button, Divider, Row, Col, Form, Input } from 'antd'
+import { Tag, Button, Divider, Row, Col, Form, Input, Icon } from 'antd'
+import ParamEditModal from 'views/param/ParamEditModal'
 import './ApiDetail.scss'
 
 const FormItem = Form.Item
@@ -24,8 +25,8 @@ class ApiDetail extends Component {
 
   componentDidMount () { }
 
-  openApiEditModal (id) {
-    this.apiEditModal.show(id)
+  openParamEditModal (id) {
+    this.paramEditModal.show(id, this.apisStore.currId)
   }
 
   getFormItems () {
@@ -37,14 +38,17 @@ class ApiDetail extends Component {
 
     const formItems = this.paramsStore.sortedArrRows.map((p, i) => {
       return (
-        <FormItem {...formItemLayout} label={p.name} required={p.required} key={i} help={p.description} >
+        <FormItem {...formItemLayout} required={p.required} key={i} help={p.description} label={p.name} >
           {
             getFieldDecorator(p.name, {
               initialValue: p.default || '',
               rules: [{ required: p.required, message: '请输入必填字段' }]
             })(<Input className='param-input' />)
           }
-          <span className='param-type'><Tag color='purple'>{p.type}</Tag></span>
+          <span className='param-type'>
+            <Tag color='purple'>{p.type}</Tag>
+            <Tag color='geekblue' onClick={_ => this.openParamEditModal(p.id)}><Icon type='edit' /></Tag>
+          </span>
         </FormItem>
       )
     })
@@ -80,9 +84,11 @@ class ApiDetail extends Component {
             <Form>
               {this.getFormItems()}
               <FormItem wrapperCol={{ span: 17, offset: 7 }}>
-                <Button size='small' type='primary' icon='play-circle-o' onClick={_ => this.submitDebug()}>调试运行</Button>
+                <Button size='small' type='primary' icon='play-circle-o'
+                  onClick={_ => this.submitDebug()}>调试运行</Button>
                 <Divider type='vertical' />
-                <Button size='small' type='primary' ghost icon='plus' onClick={_ => this.submitDebug()}>添加参数</Button>
+                <Button size='small' type='primary' ghost icon='plus'
+                  onClick={_ => this.openParamEditModal(0)}>添加参数</Button>
               </FormItem>
             </Form>
           </Col>
@@ -90,6 +96,7 @@ class ApiDetail extends Component {
           <Col span={12} />
         </Row>
 
+        <ParamEditModal wrappedComponentRef={m => (this.paramEditModal = m)} stores={this.props.stores} />
       </div>
     )
   }

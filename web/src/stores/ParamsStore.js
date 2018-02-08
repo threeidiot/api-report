@@ -17,6 +17,13 @@ export default class ParamsStore {
     return sortedRowsArr
   }
 
+  getRow (id) {
+    if (this.rows.has(id)) {
+      return this.rows.get(id)
+    }
+    return {}
+  }
+
   @action async fetchRows (apiId) {
     const result = await api.get('/param/rows', { api_id: apiId })
     if (result) {
