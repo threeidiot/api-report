@@ -1,0 +1,29 @@
+.api-detail {
+  .project {
+    .ant-divider {
+      margin-top: 16px;
+    }
+  }
+
+  .ant-form-item {
+    .ant-form-item-label label {
+      font-size: 13px;
+    }
+    .ant-form-explain {
+      font-size: 12px;
+    }
+    .param-input {
+      width: 200px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    .param-type {
+      display: inline-block;
+      padding-right: 8px;
+    }
+  }
+
+  .ant-btn-sm {
+    font-size: 12px;
+  }
+}

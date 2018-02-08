@@ -24,6 +24,11 @@ export default class ProjectDetail extends Component {
     this.apiEditModal.show(id)
   }
 
+  gotoApiDetail (aid) {
+    const path = `/project/${this.projectsStore.currId}/api/${aid}`
+    this.props.history.push(path)
+  }
+
   render () {
     const columns = [{
       title: '请求方法',
@@ -50,7 +55,8 @@ export default class ProjectDetail extends Component {
             <Button type='primary' ghost size='small' icon='edit'
               onClick={_ => this.openApiEditModal(row.id)}>编辑</Button>
             <Divider type='vertical' />
-            <Button type='primary' ghost size='small' icon='play-circle-o'>调试</Button>
+            <Button type='primary' ghost size='small' icon='play-circle-o'
+              onClick={_ => this.gotoApiDetail(row.id)}>调试</Button>
           </span>
         )
       }
