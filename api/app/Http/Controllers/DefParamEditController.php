@@ -8,18 +8,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Api;
-use App\Models\Param;
+use App\Models\DefParam;
+use App\Models\Project;
 use Validator;
 use Illuminate\Http\Request;
 
-class ParamEditController extends Controller
+class DefParamEditController extends Controller
 {
 
     public function run(Request $req) {
 
         $validator = Validator::make($req->all(), [
-            'api_id' => 'required',
+            'project_id' => 'required',
             'name' => 'required',
             'in' => 'required',
             'type' => 'required',
@@ -29,23 +29,23 @@ class ParamEditController extends Controller
             return $this->_ajaxError($validator->errors()->first());
         }
 
-        $api = Api::whereId($req->get('api_id', 0))->first();
-        if (empty($api)) {
-            return $this->_ajaxError('没有找到接口记录');
+        $project = Project::whereId($req->get('project_id', 0))->first();
+        if (empty($project)) {
+            return $this->_ajaxError('没有找到项目记录');
         }
 
         // 如果 > 0 是编辑, = 0 是新建
         $id = $req->get('id', 0);
         if ($id) {
-            $row = Param::whereId($id)->first();
+            $row = DefParam::whereId($id)->first();
             if (empty($row)) {
-                return $this->_ajaxError('没有找到参数数据');
+                return $this->_ajaxError('没有找到预定义参数数据');
             }
         } else {
-            $row = new Param();
+            $row = new DefParam();
         }
 
-        $row->api_id = $req->get('api_id');
+        $row->project_id = $req->get('project_id');
         $row->name = $req->get('name');
         $row->in = $req->get('in');
         $row->type = $req->get('type', '');
@@ -55,7 +55,7 @@ class ParamEditController extends Controller
         $row->save();
 
         return $this->_ajaxSuccess([
-            'row' => Param::whereId($row->id)->first()->toArray()
+            'row' => DefParam::whereId($row->id)->first()
         ]);
     }
 

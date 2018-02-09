@@ -25,3 +25,7 @@ Route::get('/api/debug', 'ApiDebugController@run');
 # 参数列表,编辑,添加
 Route::get('/param/rows', 'ParamRowsController@run');
 Route::get('/param/edit', 'ParamEditController@run');
+
+# 预定义参数
+Route::get('/def/param/rows', 'DefParamRowsController@run');
+Route::get('/def/param/edit', 'DefParamEditController@run');
