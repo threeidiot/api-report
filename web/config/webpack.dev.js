@@ -20,10 +20,10 @@ module.exports = Merge(CommonConfig, {
     host: '0.0.0.0',
 
     proxy: {
-      '/api/**': {
+      '/v1/**': {
         target: 'http://127.0.0.1:7500',
         changeOrigin: true,
-        pathRewrite: { '^/api': '' }
+        pathRewrite: { '^/v1': '' }
       }
     }
   }

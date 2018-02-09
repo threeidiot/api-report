@@ -14,7 +14,7 @@ function checkStatus (response) {
 }
 
 async function request (url, options) {
-  const response = await window.fetch('/api' + url, {
+  const response = await window.fetch('/v1' + url, {
     ...options,
     credentials: 'include' // 包含cookie
   })

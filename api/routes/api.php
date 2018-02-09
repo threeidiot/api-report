@@ -17,9 +17,10 @@ use Illuminate\Http\Request;
 Route::get('/project/rows', 'ProjectRowsController@run');
 Route::get('/project/edit', 'ProjectEditController@run');
 
-# API列表,编辑,添加
+# API列表,编辑,添加,调试
 Route::get('/api/rows', 'ApiRowsController@run');
 Route::get('/api/edit', 'ApiEditController@run');
+Route::get('/api/debug', 'ApiDebugController@run');
 
 # 参数列表,编辑,添加
 Route::get('/param/rows', 'ParamRowsController@run');

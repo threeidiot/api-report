@@ -1,8 +1,27 @@
 .api-detail {
-  .project {
-    .ant-divider {
-      margin-top: 16px;
+  padding: 0 !important;
+  min-height: inherit;
+
+  .ant-row-flex {
+    min-height: inherit;
+  }
+
+  .left-block {
+    background: white;
+    flex-grow: 1;
+    padding: 24px;
+    min-height: inherit;
+    .project {
+      .ant-divider {
+        margin-top: 16px;
+      }
     }
+  }
+
+  .right-block {
+    flex-grow: 1;
+    padding: 24px;
+    background: rgb(39, 40, 34);
   }
 
   .ant-form-item {
@@ -22,7 +41,6 @@
       padding-right: 8px;
     }
   }
-
   .ant-btn-sm {
     font-size: 12px;
   }

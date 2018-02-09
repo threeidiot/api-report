@@ -1,10 +1,11 @@
 .main-layout {
-
   .content {
     margin: 16px;
-    padding: 24px;
     background: #fff;
-    min-height: calc(100vh - 90px - 33px );
+    min-height: calc(100vh - 90px - 33px);
+    > div {
+      padding: 24px;
+    }
   }
 
   .ant-layout-footer {

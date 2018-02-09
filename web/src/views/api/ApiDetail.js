@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Tag, Button, Divider, Row, Col, Form, Input, Icon } from 'antd'
+import * as api from 'helpers/api'
+import ReactJson from 'react-json-view'
 import ParamEditModal from 'views/param/ParamEditModal'
 import './ApiDetail.scss'
 
@@ -17,6 +19,8 @@ class ApiDetail extends Component {
 
     this.projectsStore.setCurrId(props.match.params.pid)
     this.apisStore.setCurrId(props.match.params.aid)
+
+    this.state = { json: '' }
 
     this.paramsStore.fetchRows(this.apisStore.currId)
   }
@@ -59,10 +63,12 @@ class ApiDetail extends Component {
   submitDebug () {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log(values)
-        // this.apisStore.saveRow(values).then(result => {
-        // this.setState({ visible: false })
-        // })
+        const params = { api_id: this.apisStore.currId, ...values }
+        api.get('/api/debug', params).then(result => {
+          if (result) {
+            this.setState({ json: result.json })
+          }
+        })
       }
     })
   }
@@ -73,8 +79,8 @@ class ApiDetail extends Component {
 
     return (
       <div className='api-detail'>
-        <Row>
-          <Col span={12}>
+        <Row type='flex'>
+          <Col span={12} className='left-block'>
             <div className='project'>
               <h3>{project.title} - {api.summary}</h3>
               <Tag color='blue'>{project.schemes}://{project.host}{project.base_path}{api.path}</Tag>
@@ -93,7 +99,14 @@ class ApiDetail extends Component {
             </Form>
           </Col>
 
-          <Col span={12} />
+          <Col span={12} className='right-block'>
+            <ReactJson
+              src={this.state.json === '' ? {} : this.state.json}
+              name={null}
+              iconStyle='circle'
+              theme='monokai'
+            />
+          </Col>
         </Row>
 
         <ParamEditModal wrappedComponentRef={m => (this.paramEditModal = m)} stores={this.props.stores} />

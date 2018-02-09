@@ -10,7 +10,8 @@
   "require": {
     "php": ">=7.1",
     "fideloper/proxy": "~3.3",
-    "laravel/tinker": "~1.0"
+    "laravel/tinker": "~1.0",
+    "guzzlehttp/guzzle": "~6.3.0"
   },
   "require-dev": {
     "doctrine/dbal": "^2.6",
