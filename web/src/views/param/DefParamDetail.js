@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Table, Tag, Button, Divider, Row, Col, Icon } from 'antd'
-import ApiEditModal from 'views/api/ApiEditModal'
+import DefParamEditModal from 'views/param/DefParamEditModal'
 import './DefParamDetail.scss'
 
 @inject('stores')
@@ -16,6 +16,10 @@ export default class DefParamDetail extends Component {
     this.projectsStore.setCurrId(props.match.params.id)
 
     this.defParamsStore.fetchRows(this.projectsStore.currId)
+  }
+
+  openDefParamEditModal (id) {
+    this.defParamEditModal.show(id, this.projectsStore.currId)
   }
 
   render () {
@@ -59,7 +63,7 @@ export default class DefParamDetail extends Component {
         return (
           <span>
             <Button type='primary' ghost size='small' icon='edit'
-              onClick={_ => this.openApiEditModal(row.id)}>编辑</Button>
+              onClick={_ => this.openDefParamEditModal(row.id)}>编辑</Button>
           </span>
         )
       }
@@ -76,7 +80,7 @@ export default class DefParamDetail extends Component {
               <h3>{project.title} - 全局参数</h3>
             </Col>
             <Col span={12} className='btns'>
-              <Button type='primary' icon='plus' size='small' onClick={_ => this.openApiEditModal(0)}>添加全局参数</Button>
+              <Button type='primary' icon='plus' size='small' onClick={_ => this.openDefParamEditModal(0)}>添加全局参数</Button>
             </Col>
           </Row>
           <Divider />
@@ -90,7 +94,7 @@ export default class DefParamDetail extends Component {
           rowKey='id'
         />
 
-        <ApiEditModal wrappedComponentRef={m => (this.apiEditModal = m)} {...this.props} />
+        <DefParamEditModal wrappedComponentRef={m => (this.defParamEditModal = m)} {...this.props} />
       </div>
     )
   }
