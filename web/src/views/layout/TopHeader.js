@@ -47,6 +47,10 @@ export default class TopHeader extends React.Component {
             />
           </SubMenu>
 
+          <Menu.Item key='def-param' disabled={!activeProject}>
+            <Link to={`/project/${this.projectsStore.currId}/param`}><Icon type='paper-clip' /> 全局参数</Link>
+          </Menu.Item>
+
         </Menu>
       </Header>
     )

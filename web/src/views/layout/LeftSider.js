@@ -33,11 +33,17 @@ export default class LeftSider extends React.Component {
     this.projectEditModal.show()
   }
 
+  gotoHome () {
+    this.projectsStore.setCurrId(0)
+  }
+
   render () {
     return (
       <Sider className='left-sider'>
 
-        <div className='logo'>API Report</div>
+        <div className='logo'>
+          <Link to='/' onClick={_ => this.gotoHome()}>API Report</Link>
+        </div>
 
         <div className='add-project-btn'>
           <Button type='dashed' ghost icon='plus' onClick={_ => this.openProjectEditModal()}>添加项目</Button>

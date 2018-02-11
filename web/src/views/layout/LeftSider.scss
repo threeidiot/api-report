@@ -15,7 +15,10 @@
     font-size: 13px;
     text-align: center;
     line-height: 32px;
-    color: white;
+    a {
+      color: white;
+      text-decoration: none;
+    }
   }
 
   .add-project-btn {

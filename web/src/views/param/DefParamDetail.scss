@@ -1,0 +1,33 @@
+.def-param-detail {
+
+  .project {
+    position: relative;
+    h3 {
+      font-weight: normal;
+      font-size: 15px;
+    }
+    .ant-divider {
+      margin-top: 16px;
+    }
+    .btns {
+      button {
+        float: right;
+      }
+    }
+  }
+
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    padding: 6px 12px;
+  }
+
+  .ant-table-thead > tr > th {
+    font-size: 13px;
+  }
+  .ant-table-tbody > tr > td {
+    font-size: 13px;
+  }
+
+  .ant-btn-sm {
+    font-size: 12px;
+  }
+}
