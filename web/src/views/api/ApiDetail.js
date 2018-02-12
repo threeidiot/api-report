@@ -132,6 +132,9 @@ class ApiDetail extends Component {
                 <Divider type='vertical' />
                 <Button size='small' type='primary' ghost icon='plus'
                   onClick={_ => this.openParamEditModal(0)}>添加参数</Button>
+                <Divider type='vertical' />
+                <Button size='small' type='primary' ghost icon='plus'
+                  onClick={_ => this.openDefParamEditModal(0)}>添加全局参数</Button>
               </FormItem>
               {this.getDefFormItems()}
             </Form>
