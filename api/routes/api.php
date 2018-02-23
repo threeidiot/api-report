@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+# 首页信息
+Route::get('/home/info', 'HomeController@run');
 
 # 项目列表,编辑,添加
 Route::get('/project/rows', 'ProjectRowsController@run');
@@ -30,5 +32,3 @@ Route::get('/param/edit', 'ParamEditController@run');
 Route::get('/def/param/rows', 'DefParamRowsController@run');
 Route::get('/def/param/edit', 'DefParamEditController@run');
 
-# 首页信息
-Route::get('/home/info', 'HomeController@run');
