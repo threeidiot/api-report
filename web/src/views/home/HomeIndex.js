@@ -18,7 +18,7 @@ export default class HomeIndex extends Component {
     return (
       <div className='home-index'>
         <Row gutter={16}>
-          <Col span={4}>
+          <Col span={6}>
             <Card title='项目总数'>
               <p>共有 {this.homeStore.data.project_cnt} 个项目</p>
             </Card>
