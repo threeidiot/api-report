@@ -20,10 +20,10 @@ class ApiRowsController extends Controller
         $project_id = (int)$req->get('project_id', 0);
         $project = Project::whereId($project_id)->first();
         if (!$project) {
-            return $this->_ajaxError('没有找到项目记录');
+            return $this->_jsonError('没有找到项目记录');
         }
         $rows = Api::whereProjectId($project_id)
             ->orderByDesc('id')->get();
-        return $this->_ajaxSuccess(['rows' => $rows]);
+        return $this->_jsonSuccess(['rows' => $rows]);
     }
 }

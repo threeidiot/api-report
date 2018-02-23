@@ -21,12 +21,12 @@ class ParamRowsController extends Controller
 
         $api = Api::whereId($api_id)->first();
         if (empty($api)) {
-            return $this->_ajaxError('没有找到接口记录');
+            return $this->_jsonError('没有找到接口记录');
         }
 
         $rows = Param::whereApiId($api_id)->orderBy('id', 'desc')->get()->toArray();
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'rows' => $rows,
         ]);
     }

@@ -24,7 +24,7 @@ class ProjectEditController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->_ajaxError($validator->errors()->first());
+            return $this->_jsonError($validator->errors()->first());
         }
 
         // 如果 > 0 是编辑, = 0 是新建
@@ -32,7 +32,7 @@ class ProjectEditController extends Controller
         if ($id) {
             $row = Project::whereId($id)->first();
             if (empty($row)) {
-                return $this->_ajaxError('没有找到项目数据');
+                return $this->_jsonError('没有找到项目数据');
             }
         } else {
             $row = new Project();
@@ -46,7 +46,7 @@ class ProjectEditController extends Controller
         $row->save();
 
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'row' => Project::whereId($row->id)->first()->toArray()
         ]);
     }

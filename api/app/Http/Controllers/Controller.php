@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function _ajaxSuccess($data, $cookie = null) {
+    protected function _jsonSuccess($data, $cookie = null) {
         $resp = Response::json([
             'status' => 'success',
             'result' => $data,
@@ -26,7 +26,7 @@ class Controller extends BaseController
         return $resp;
     }
 
-    protected function _ajaxError($msg) {
+    protected function _jsonError($msg) {
         return Response::json([
             'status'  => 'error',
             'message' => $msg,

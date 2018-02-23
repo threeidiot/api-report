@@ -26,12 +26,12 @@ class DefParamEditController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->_ajaxError($validator->errors()->first());
+            return $this->_jsonError($validator->errors()->first());
         }
 
         $project = Project::whereId($req->get('project_id', 0))->first();
         if (empty($project)) {
-            return $this->_ajaxError('没有找到项目记录');
+            return $this->_jsonError('没有找到项目记录');
         }
         // todo api_id 是关键字,不能被使用
 
@@ -40,7 +40,7 @@ class DefParamEditController extends Controller
         if ($id) {
             $row = DefParam::whereId($id)->first();
             if (empty($row)) {
-                return $this->_ajaxError('没有找到预定义参数数据');
+                return $this->_jsonError('没有找到预定义参数数据');
             }
         } else {
             $row = new DefParam();
@@ -55,7 +55,7 @@ class DefParamEditController extends Controller
         $row->description = $req->get('description');
         $row->save();
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'row' => DefParam::whereId($row->id)->first()
         ]);
     }

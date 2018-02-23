@@ -21,12 +21,12 @@ class DefParamRowsController extends Controller
 
         $project = Project::whereId($project_id)->first();
         if (empty($project)) {
-            return $this->_ajaxError('没有找到项目记录');
+            return $this->_jsonError('没有找到项目记录');
         }
 
         $rows = DefParam::whereProjectId($project_id)->orderBy('id', 'desc')->get();
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'rows' => $rows,
         ]);
     }

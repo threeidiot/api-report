@@ -26,12 +26,12 @@ class ParamEditController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->_ajaxError($validator->errors()->first());
+            return $this->_jsonError($validator->errors()->first());
         }
 
         $api = Api::whereId($req->get('api_id', 0))->first();
         if (empty($api)) {
-            return $this->_ajaxError('没有找到接口记录');
+            return $this->_jsonError('没有找到接口记录');
         }
 
 
@@ -42,7 +42,7 @@ class ParamEditController extends Controller
         if ($id) {
             $row = Param::whereId($id)->first();
             if (empty($row)) {
-                return $this->_ajaxError('没有找到参数数据');
+                return $this->_jsonError('没有找到参数数据');
             }
         } else {
             $row = new Param();
@@ -57,7 +57,7 @@ class ParamEditController extends Controller
         $row->description = $req->get('description');
         $row->save();
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'row' => Param::whereId($row->id)->first()->toArray()
         ]);
     }

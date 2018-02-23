@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { Card, Row, Col } from 'antd'
 
 @inject('stores')
 @observer
 export default class HomeIndex extends Component {
   constructor (props) {
     super(props)
-    this.projectsStore = this.props.stores.projectsStore
+    this.homeStore = this.props.stores.homeStore
+  }
+
+  componentDidMount () {
+    this.homeStore.fetchData()
   }
 
   render () {
     return (
-      <p>首页 占位页面</p>
+      <div className='home-index'>
+        <Row gutter={16}>
+          <Col span={4}>
+            <Card title='项目总数'>
+              <p>共有 {this.homeStore.data.project_cnt} 个项目</p>
+            </Card>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

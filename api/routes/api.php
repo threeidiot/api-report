@@ -29,3 +29,6 @@ Route::get('/param/edit', 'ParamEditController@run');
 # 预定义参数
 Route::get('/def/param/rows', 'DefParamRowsController@run');
 Route::get('/def/param/edit', 'DefParamEditController@run');
+
+# 首页信息
+Route::get('/home/info', 'HomeController@run');

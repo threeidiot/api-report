@@ -21,7 +21,7 @@ class ApiDebugController extends Controller
         $api_id = $req->get('api_id', 0);
         $api = Api::whereId($api_id)->first();
         if (empty($api)) {
-            return $this->_ajaxError('没有找到接口记录');
+            return $this->_jsonError('没有找到接口记录');
         }
 
         $project = Project::whereId($api->project_id)->first();
@@ -52,7 +52,7 @@ class ApiDebugController extends Controller
             ]);
         }
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'json' => $response ? json_decode($response->getBody()) : '',
         ]);
     }

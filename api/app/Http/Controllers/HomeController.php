@@ -8,19 +8,20 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use View;
 
-class ProjectRowsController extends Controller
+class HomeController extends Controller
 {
 
-    public function run(Request $req) {
-
-        $rows = Project::orderBy('id', 'desc')->get()->toArray();
+    public function run()
+    {
+        $project_cnt = Project::count();
 
         return $this->_jsonSuccess([
-            'rows' => $rows,
+            'project_cnt' => $project_cnt
         ]);
     }
+
 }

@@ -25,12 +25,12 @@ class ApiEditController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->_ajaxError($validator->errors()->first());
+            return $this->_jsonError($validator->errors()->first());
         }
 
         $project = Project::whereId($req->get('project_id', 0))->first();
         if (empty($project)) {
-            return $this->_ajaxError('没有找到项目记录');
+            return $this->_jsonError('没有找到项目记录');
         }
 
         // 如果 > 0 是编辑, = 0 是新建
@@ -38,7 +38,7 @@ class ApiEditController extends Controller
         if ($id) {
             $row = Api::whereId($id)->first();
             if (empty($row)) {
-                return $this->_ajaxError('没有找到接口数据');
+                return $this->_jsonError('没有找到接口数据');
             }
         } else {
             $row = new Api();
@@ -55,7 +55,7 @@ class ApiEditController extends Controller
         $row->save();
 
 
-        return $this->_ajaxSuccess([
+        return $this->_jsonSuccess([
             'row' => Api::whereId($row->id)->first()->toArray()
         ]);
     }
