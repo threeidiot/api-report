@@ -15,7 +15,7 @@ class ProjectSeed extends Seeder
         //
         $project = new Project();
         $project->title = 'api-report';
-        $project->host = '127.0.0.1:7500';
+        $project->host = '127.0.0.1:7501';
         $project->schemes = 'http';
         $project->save();
     }
