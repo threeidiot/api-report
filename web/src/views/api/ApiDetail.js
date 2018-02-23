@@ -44,7 +44,7 @@ class ApiDetail extends Component {
   }
 
   openDefParamEditModal (id) {
-    this.paramEditModal.show(id, this.projectsStore.currId)
+    this.defParamEditModal.show(id, this.projectsStore.currId)
   }
 
   getFormItems () {
@@ -73,9 +73,12 @@ class ApiDetail extends Component {
   getDefFormItems () {
     const { getFieldDecorator } = this.props.form
 
-    const formItems = this.defParamsStore.sortedArrRows.filter(p => p.in !== 'header').map((p, i) => {
-      return (
-        <FormItem {...this.formItemLayout} required={p.required} key={`g${i}`} help={p.description} label={p.name} >
+    let defParam = []
+    let defHeader = []
+
+    this.defParamsStore.sortedArrRows.map((p, i) => {
+      const formItem = (
+        <FormItem {...this.formItemLayout} required={p.required} key={`g${i}`} help={p.description} label={p.name}>
           {
             getFieldDecorator(p.name, {
               initialValue: p.default || '',
@@ -88,13 +91,22 @@ class ApiDetail extends Component {
           </span>
         </FormItem>
       )
+      if (p.in === 'header') {
+        defHeader.push(formItem)
+      } else {
+        defParam.push(formItem)
+      }
     })
 
-    if (formItems.length > 0) {
-      formItems.splice(0, 0, <Divider key='divider'>全局参数</Divider>)
+    if (defParam.length > 0) {
+      defParam.splice(0, 0, <Divider key='divider-def-param'>全局参数</Divider>)
     }
 
-    return formItems
+    if (defHeader.length > 0) {
+      defHeader.splice(0, 0, <Divider key='divider-def-header'>全局 HTTP Header</Divider>)
+    }
+
+    return defParam.concat(defHeader)
   }
 
   submitDebug () {
@@ -151,7 +163,7 @@ class ApiDetail extends Component {
         </Row>
 
         <ParamEditModal wrappedComponentRef={m => (this.paramEditModal = m)} stores={this.props.stores} />
-        <DefParamEditModal wrappedComponentRef={m => (this.paramEditModal = m)} stores={this.props.stores} />
+        <DefParamEditModal wrappedComponentRef={m => (this.defParamEditModal = m)} stores={this.props.stores} />
       </div>
     )
   }

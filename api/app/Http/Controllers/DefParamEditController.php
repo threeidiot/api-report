@@ -33,6 +33,7 @@ class DefParamEditController extends Controller
         if (empty($project)) {
             return $this->_ajaxError('没有找到项目记录');
         }
+        // todo api_id 是关键字,不能被使用
 
         // 如果 > 0 是编辑, = 0 是新建
         $id = $req->get('id', 0);
