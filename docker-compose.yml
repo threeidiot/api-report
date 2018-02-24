@@ -1,0 +1,35 @@
+version: "3"
+services:
+  nginx:
+    image: daocloud.io/nginx
+    ports:
+      - "7500:7500"
+      - "7501:7501"
+      - "7600:7600"
+    links:
+      - api
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./web/dist:/usr/share/nginx/html
+
+  api:
+    image: daocloud.io/library/php:7.1.11-fpm
+    working_dir: /api
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./api:/api
+
+  composer:
+    image: library/composer
+    command: composer install
+    working_dir: /app
+    volumes:
+      - ./api:/app
+
+  node:
+    image: daocloud.io/node:carbon
+    command: bash -ci 'yarn install && yarn build'
+    working_dir: /app
+    volumes:
+      - ./web:/app

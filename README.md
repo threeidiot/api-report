@@ -5,6 +5,12 @@
 [![Build Status](https://travis-ci.org/threeidiot/api-report.svg?branch=master)](https://travis-ci.org/threeidiot/api-report)
 [![Coverage Status](https://coveralls.io/repos/github/threeidiot/api-report/badge.svg?branch=master)](https://coveralls.io/github/threeidiot/api-report?branch=master)
 
+
+## 运行
+
+docker-compose run --rm composer install
+docker-compose run --rm node bash -ci 'yarn install && yarn build'
+
 ## TODO
 
 1. 项目描述、接口描述
