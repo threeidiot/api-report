@@ -18,6 +18,6 @@ docker-compose up -d nginx
 
 # laravel key 、数据、优化
 docker-compose exec api php artisan key:generate
-docker-compose exec api php artisan migrate --seed
+docker-compose exec api php artisan migrate --seed --env=docker
 docker-compose exec api php artisan optimize
 

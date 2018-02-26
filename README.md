@@ -13,10 +13,7 @@ docker-compose run --rm node bash -ci 'yarn install && yarn build'
 
 ## TODO
 
-1. 部署一键运行
-1. 本地一键运行
-1. ip 自动获取
-
+1. 本地 ip 设置
 1. 项目描述、接口描述
 1. 一键部署，并设置demo
 1. readme, 和贡献分开
