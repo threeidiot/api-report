@@ -15,7 +15,7 @@ if [ -d "vendor" ]
 then
     rm -rf vendor
 fi
-composer install
+composer update
 php artisan key:generate
 php artisan migrate --seed
 
@@ -25,6 +25,6 @@ if [ -d "node_modules" ]
 then
     rm -rf node_modules
 fi
-yarn install
+yarn upgrade
 
 echo 'Success! Please execute the local-run.sh file.'

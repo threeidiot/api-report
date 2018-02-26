@@ -1,8 +1,13 @@
 #! /bin/bash
 
-# laravel 的 sqlite 数据库和配置文件
+# 创建 sqlite 数据库
 touch api/database/database.sqlite
-cp api/.env.example api/.env
+
+# 复制 laravel 配置文件
+if [ ! -f "api/.env" ] 
+then
+    cp api/.env.example api/.env
+fi
 
 # 安装依赖 
 docker-compose run composer

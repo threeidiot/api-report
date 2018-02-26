@@ -22,14 +22,14 @@ services:
 
   composer:
     image: library/composer
-    command: composer install
+    command: composer update
     working_dir: /app
     volumes:
       - ./api:/app
 
   node:
     image: daocloud.io/node:carbon
-    command: bash -ci 'yarn install && yarn build'
+    command: bash -ci 'yarn upgrade && yarn build'
     working_dir: /app
     volumes:
       - ./web:/app
