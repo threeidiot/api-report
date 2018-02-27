@@ -16,6 +16,9 @@ sudo docker-compose run node
 # 启动容器
 sudo docker-compose up -d nginx
 
+# 设置容器目录权限
+sudo docker-compose exec api chown -R www-data.www-data /api/storage
+
 # laravel key 、数据、优化
 sudo docker-compose exec api php artisan key:generate
 sudo docker-compose exec api php artisan migrate --seed --env=docker
