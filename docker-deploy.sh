@@ -10,14 +10,14 @@ then
 fi
 
 # 安装依赖 
-docker-compose run composer
-docker-compose run node
+sudo docker-compose run composer
+sudo docker-compose run node
 
 # 启动容器
-docker-compose up -d nginx
+sudo docker-compose up -d nginx
 
 # laravel key 、数据、优化
-docker-compose exec api php artisan key:generate
-docker-compose exec api php artisan migrate --seed --env=docker
-docker-compose exec api php artisan optimize
+sudo docker-compose exec api php artisan key:generate
+sudo docker-compose exec api php artisan migrate --seed --env=docker
+sudo docker-compose exec api php artisan optimize
 
