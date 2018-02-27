@@ -29,7 +29,7 @@ services:
 
   node:
     image: daocloud.io/node:carbon
-    command: bash -ci 'yarn upgrade && yarn build'
+    command: bash -ci 'yarn upgrade --pure-lockfile && yarn build'
     working_dir: /app
     volumes:
       - ./web:/app

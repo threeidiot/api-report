@@ -25,7 +25,7 @@ class ProjectSeed extends Seeder
             $project->description = 'API Report 自身的 API';
         }
         if (App::environment() === 'docker') {
-            $project->host = 'nginx:7501';
+            $project->host = 'nginx:7602';
         } else {
             $project->host = '127.0.0.1:7602';
         }
