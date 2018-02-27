@@ -27,7 +27,7 @@ class ProjectSeed extends Seeder
         if (App::environment() === 'docker') {
             $project->host = 'nginx:7501';
         } else {
-            $project->host = '127.0.0.1:7501';
+            $project->host = '127.0.0.1:7602';
         }
         $project->save();
 
