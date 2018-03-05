@@ -21,7 +21,7 @@ module.exports = Merge(CommonConfig, {
 
     proxy: {
       '/v1/**': {
-        target: 'http://127.0.0.1:7500',
+        target: 'http://127.0.0.1:7601',
         changeOrigin: true,
         pathRewrite: { '^/v1': '' }
       }
