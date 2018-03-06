@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Table, Tag, Button, Divider, Row, Col } from 'antd'
 import ApiEditModal from 'views/api/ApiEditModal'
+import ActiveProject from 'views/project/ActiveProject'
 import './ProjectDetail.scss'
 
 @inject('stores')
@@ -62,16 +63,13 @@ export default class ProjectDetail extends Component {
       }
     }]
 
-    const project = this.projectsStore.row
-
     return (
       <div className='project-detail'>
 
         <div className='project'>
           <Row>
             <Col span={12}>
-              <h3>{project.title}</h3>
-              <Tag color='blue'>{project.schemes}://{project.host}{project.base_path}</Tag>
+              <ActiveProject activeProjectId={this.projectsStore.row.id} />
             </Col>
             <Col span={12} className='btns'>
               <Button type='primary' icon='plus' size='small' onClick={_ => this.openApiEditModal(0)}>添加接口</Button>
