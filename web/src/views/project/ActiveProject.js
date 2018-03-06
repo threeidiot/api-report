@@ -37,13 +37,14 @@ class ActiveProject extends React.Component {
 
   getHostTag () {
     const project = this.projectsStore.row
+    const path = this.apisStore.row.path || ''
     let tmpHost = window.localStorage.getItem(this.getPersistKey(project.id))
     if (tmpHost) {
       tmpHost = JSON.parse(tmpHost)
-      const fullHost = `${tmpHost.scheme}://${tmpHost.host}${tmpHost.basePath}`
+      const fullHost = `${tmpHost.scheme}://${tmpHost.host}${tmpHost.basePath}${path}`
       return <Tag color='volcano'>{fullHost}</Tag>
     }
-    const fullHost = `${project.schemes}://${project.host}${project.base_path}`
+    const fullHost = `${project.schemes}://${project.host}${project.base_path}${path}`
     return <Tag color='blue'>{fullHost}</Tag>
   }
 

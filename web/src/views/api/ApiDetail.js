@@ -5,6 +5,7 @@ import * as api from 'helpers/api'
 import ReactJson from 'react-json-view'
 import ParamEditModal from 'views/param/ParamEditModal'
 import DefParamEditModal from 'views/param/DefParamEditModal'
+import ActiveProject from 'views/project/ActiveProject'
 import './ApiDetail.scss'
 
 const FormItem = Form.Item
@@ -124,15 +125,13 @@ class ApiDetail extends Component {
 
   render () {
     const project = this.projectsStore.row
-    const api = this.apisStore.row
 
     return (
       <div className='api-detail'>
         <Row type='flex'>
           <Col span={12} className='left-block'>
             <div className='project'>
-              <h3>{project.title} - {api.summary}</h3>
-              <Tag color='blue'>{project.schemes}://{project.host}{project.base_path}{api.path}</Tag>
+              <ActiveProject activeProjectId={project.id} />
               <Divider />
             </div>
 
