@@ -5,6 +5,8 @@ import { Provider } from 'mobx-react'
 import stores from 'stores'
 import MainLayout from 'views/layout/MainLayout'
 
+import './global.scss'
+
 ReactDom.render(
   (
     <Provider stores={stores}>

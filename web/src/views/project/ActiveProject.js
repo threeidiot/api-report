@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tag, Badge, Modal, Form, Input } from 'antd'
+import { Tag, Badge, Modal, Form, Input, Tooltip, Icon } from 'antd'
 import { observer, inject } from 'mobx-react'
 import './ActiveProject.scss'
 
@@ -101,9 +101,12 @@ class ActiveProject extends React.Component {
     return (
       <div className='active-project'>
         <h3><Badge status='success' text={project.title} /></h3>
-        <div class='tmp-host'>
+        <div className='tmp-host'>
           {this.getHostTag()}
           {this.getTmpHostOpBtn()}
+          <Tooltip placement='right' title={'本地修改 API 访问地址，不影响其他用户，方便调试'}>
+            &nbsp;<Icon type='question-circle-o' />
+          </Tooltip>
         </div>
 
         <Modal
