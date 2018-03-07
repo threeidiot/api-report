@@ -10,23 +10,33 @@ class ProjectEditModal extends Component {
     this.apisStore = props.stores.apisStore
 
     this.state = {
+      id: 0,
       visible: false
     }
   }
 
-  show () {
-    this.setState({ visible: true })
+  show (id) {
+    this.setState({
+      id: id,
+      visible: true
+    })
   }
 
   hide () {
-    this.setState({ visible: false })
+    this.setState({
+      id: 0,
+      visible: false
+    })
   }
 
   save () {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.projectsStore.saveRow(values).then(result => {
-          this.setState({ visible: false })
+          this.setState({
+            id: 0,
+            visible: false
+          })
         })
       }
     })
@@ -39,6 +49,7 @@ class ProjectEditModal extends Component {
     }
 
     const { getFieldDecorator } = this.props.form
+    const row = this.projectsStore.rows.get(this.state.id) || {}
 
     return (
       <Modal
@@ -48,7 +59,7 @@ class ProjectEditModal extends Component {
         okText='确定'
         maskClosable={false}
         destroyOnClose
-        title={this.props.id === 0 ? '添加项目' : this.projectsStore.rows.get(this.props.id).title}
+        title={this.state.id === 0 ? '添加项目' : row.title}
         onOk={_ => this.save()}
         onCancel={_ => this.hide()}
       >
@@ -56,7 +67,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='' style={{ margin: 0 }}>
             {
               getFieldDecorator('id', {
-                initialValue: this.props.id,
+                initialValue: this.state.id,
                 rules: [{ required: true }]
               })(<Input hidden />)
             }
@@ -64,7 +75,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='项目名称' >
             {
               getFieldDecorator('title', {
-                initialValue: this.projectsStore.row.title || '',
+                initialValue: row.title || '',
                 rules: [{ required: true, message: '请输入项目名称' }]
               })(<Input />)
             }
@@ -72,7 +83,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='主机' help='域名、IP，可带端口' >
             {
               getFieldDecorator('host', {
-                initialValue: this.projectsStore.row.host || '',
+                initialValue: row.host || '',
                 rules: [{ required: true, message: '请输入主机' }]
               })(<Input />)
             }
@@ -88,7 +99,7 @@ class ProjectEditModal extends Component {
           <FormItem {...formItemLayout} label='请求前缀'>
             {
               getFieldDecorator('base_path', {
-                initialValue: this.projectsStore.row.base_path || ''
+                initialValue: row.base_path || ''
               })(<Input />)
             }
           </FormItem>

@@ -14,7 +14,8 @@ export default class ProjectDetail extends Component {
     this.apisStore = props.stores.apisStore
 
     // 获取参数的方式
-    this.projectsStore.setCurrId(props.match.params.id)
+    this.projectsStore.prepareData(props.match.params.id)
+    this.apisStore.fetchRows(props.match.params.id)
   }
 
   componentWillReceiveProps (props) { }

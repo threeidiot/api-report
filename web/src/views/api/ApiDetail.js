@@ -22,8 +22,8 @@ class ApiDetail extends Component {
     this.defParamsStore = props.stores.defParamsStore
 
     // 初始化数据
-    this.projectsStore.setCurrId(props.match.params.pid)
-    this.apisStore.setCurrId(props.match.params.aid)
+    this.projectsStore.prepareData(props.match.params.pid)
+    this.apisStore.prepareData(props.match.params.pid, props.match.params.aid)
     this.formItemLayout = {
       labelCol: { span: 7 },
       wrapperCol: { span: 17 }
@@ -140,14 +140,12 @@ class ApiDetail extends Component {
   }
 
   render () {
-    const project = this.projectsStore.row
-
     return (
       <div className='api-detail'>
         <Row type='flex'>
           <Col span={12} className='left-block'>
             <div className='project'>
-              <ActiveProject activeProjectId={project.id} />
+              <ActiveProject activeProjectId={this.projectsStore.currId} />
               <Divider />
             </div>
 

@@ -13,8 +13,7 @@ export default class DefParamDetail extends Component {
     this.projectsStore = props.stores.projectsStore
 
     // 获取参数的方式
-    this.projectsStore.setCurrId(props.match.params.id)
-
+    this.projectsStore.prepareData(props.match.params.id)
     this.defParamsStore.fetchRows(this.projectsStore.currId)
   }
 

@@ -4,10 +4,12 @@ import * as api from '../helpers/api'
 export default class ProjectsStore {
   @observable rows
   @observable currId
+  @observable isFetchRows
 
   constructor () {
     this.rows = new Map()
     this.currId = 0
+    this.isFetchRows = false
   }
 
   @computed get sortedKeys () {
@@ -32,8 +34,16 @@ export default class ProjectsStore {
       for (let row of result.rows) {
         this.rows.set(row.id, row)
       }
+      this.isFetchRows = true
     }
     return result
+  }
+
+  @action prepareData (pid) {
+    this.setCurrId(pid)
+    if (this.isFetchRows === false) {
+      this.fetchRows()
+    }
   }
 
   @action async saveRow (params) {
