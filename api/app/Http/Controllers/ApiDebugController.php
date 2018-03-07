@@ -25,18 +25,21 @@ class ApiDebugController extends Controller
         }
 
         $project = Project::whereId($api->project_id)->first();
+        $full_host = $req->get('tmp_host', '');
+        if (empty($full_host)) {
+            $full_host = "{$project->schemes}://{$project->host}{$project->base_path}";
+        }
+
         $def_param_headers = DefParam::whereProjectId($project->id)->where('in', 'header')->pluck('default', 'name');
-        $params = $req->except(array_merge(['api_id'], $def_param_headers->keys()->toArray()));
         $headers = [];
         foreach($def_param_headers as $k => $v) {
             $headers[$k] = $req->get($k, $v);
         }
 
+        $url = "{$full_host}{$api->path}";
+        $params = $req->except(array_merge(['api_id', 'tmp_host'], $def_param_headers->keys()->toArray()));
 
-        $url = "{$project->schemes}://{$project->host}{$project->base_path}{$api->path}";
         $client = new Client();
-
-
         $response = null;
         if ($api->method == 'get') {
             $response = $client->request('GET', $url, [

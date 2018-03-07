@@ -18,7 +18,7 @@ class ActiveProject extends React.Component {
       isSetTmpHost: false,
       scheme: 'http',
       host: '',
-      bashPath: ''
+      basePath: ''
     }
   }
 
@@ -64,7 +64,7 @@ class ActiveProject extends React.Component {
       isSetTmpHost: false,
       scheme: 'http',
       host: '',
-      bashPath: ''
+      basePath: ''
     })
   }
 

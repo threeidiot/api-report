@@ -113,7 +113,11 @@ class ApiDetail extends Component {
   submitDebug () {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const params = { api_id: this.apisStore.currId, ...values }
+        const params = {
+          tmp_host: this.getTmpHost(),
+          api_id: this.apisStore.currId,
+          ...values
+        }
         api.get('/api/debug', params).then(result => {
           if (result) {
             this.setState({ json: result.json })
@@ -121,6 +125,18 @@ class ApiDetail extends Component {
         })
       }
     })
+  }
+
+  getTmpHost () {
+    const id = this.projectsStore.row.id
+    let tmpHost = window.localStorage.getItem(`tmp-host-${id}`)
+    if (tmpHost) {
+      tmpHost = JSON.parse(tmpHost)
+      if (tmpHost.isSetTmpHost) {
+        return `${tmpHost.scheme}://${tmpHost.host}${tmpHost.basePath}`
+      }
+    }
+    return ''
   }
 
   render () {
