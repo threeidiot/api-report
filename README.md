@@ -72,7 +72,7 @@ bash local-run.sh
 
 ## todo
 
-1. 项目描述、接口描述
+1. 项目描述、接口描述 https://github.com/esausilva/live-markdown-editor 自己写一个editor vim 模式
 1. 菜单高亮
 1. 将临时的 Input 改成 Select 限制输入
 1. 增加路径参数
